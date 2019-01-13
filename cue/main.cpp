@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <array>
 
 const std::string LoadAssets(const std::string& path) {
 
@@ -24,13 +25,17 @@ int main() {
 
     httplib::Server svr;
 
+    std::array<std::string> routes = ["/", "/about", "/contact"];
+
     std::string body = LoadAssets("./assets/index.html");
 
     std::string indexjs = LoadAssets("./assets/index.js");
 
-    svr.Get("/", [&](const httplib::Request& req, httplib::Response& res) {
-        res.set_content(body, "text/html");
-    });
+    for (auto&& route : routes) {
+        svr.Get(route, [&](const httplib::Request& req, httplib::Response& res) {
+            res.set_content(body, "text/html");
+        });
+    }
 
     svr.Get("/index.js", [&](const httplib::Request& req, httplib::Response& res) {
         res.set_content(indexjs, "text/html");
