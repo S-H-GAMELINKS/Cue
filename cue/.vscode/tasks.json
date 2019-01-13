@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++ main.cpp httplib.h -DWEBVIEW_WINAPI=1 -lole32 -lcomctl32 -lws2_32 -loleaut32 -luuid -mwindows -DGTEST_USE_OWN_TR1_TUPLE -I.. -I. -Wall -Wextra"
+        }
+    ]
+}
