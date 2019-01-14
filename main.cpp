@@ -16,13 +16,17 @@ void CreateCue(const char* argv) {
     std::cout << "Create Cue Template!" << std::endl;
 }
 
-void ScaffoldCue(const char* argv) {
-    fs::path path = "assets/components/" + argv;
-    fs::path scaffold = "./cue/scaffold";
+void ScaffoldCue(const std::string& components_path, const std::string& scaffold_name) {
+
+    std::string cue_path = std::getenv("CUE");
+    std::string dir = "\\scaffold";
+
+    fs::path path = components_path + scaffold_name;
+    fs::path scaffold = cue_path + dir;
 
     fs::copy(scaffold, path, fs::copy_options::recursive);
 
-    std::cout << "Scaffold " << argv << " Template!" << std::endl;
+    std::cout << "Scaffold " << scaffold_name << " Template!" << std::endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -32,7 +36,7 @@ int main(int argc, char* argv[]) {
     if (cmd == "new") {
         CreateCue(argv[2]);
     } else if (cmd == "scaffold") {
-        ScaffoldCue(argv[2]);
+        ScaffoldCue("assets/components/", argv[2]);
     }
 
     return 0;
