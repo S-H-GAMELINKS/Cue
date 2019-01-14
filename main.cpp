@@ -6,7 +6,10 @@ namespace fs = std::filesystem;
 
 void CreateCue(const char* argv) {
     fs::path path = argv;
-    fs::path cue = "../cue";
+
+    std::string cue_path = std::getenv("CUE");
+    std::string dir = "\\cue";
+    fs::path cue = cue_path + dir;
 
     fs::copy(cue, path, fs::copy_options::recursive);
 
