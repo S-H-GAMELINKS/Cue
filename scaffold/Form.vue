@@ -84,7 +84,7 @@ export default {
                     alert("Can't be black in Title or Content!!");
                 } else {
                     alert("Success!");
-                    this.$router.push({name: 'places_show'});
+                    this.$router.push({name: 'caffolds_show'});
                 }
             }, (error) => {
                 alert(error);
