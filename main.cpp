@@ -42,6 +42,16 @@ void StaticCue(const std::string& components_path, const std::string& scaffold_n
     std::cout << "Static " << scaffold_name << " Template!" << std::endl;
 }
 
+void ShowCommand() {
+    std::array<std::pair<std::string, std::string>, 4> command = {{{"new", "Create New Cue App"},
+                                                                {"scaffold", "Create CRUD for Cue"},
+                                                                {"static", "Create Static file for Vue Components"},
+                                                                {"help", "Show Command Help"}}};
+
+    for(auto&& c : command)
+        std::cout << c.first << " : " << c.second << std::endl;
+}
+
 int main(int argc, char* argv[]) {
 
     std::string cmd = argv[1];
@@ -52,6 +62,8 @@ int main(int argc, char* argv[]) {
         ScaffoldCue("assets/components/", argv[2]);
     } else if (cmd == "static") {
         StaticCue("assets/components/", argv[2]);
+    } else if (cmd == "help") {
+        ShowCommand();
     }
 
     return 0;
