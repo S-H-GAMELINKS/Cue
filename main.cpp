@@ -33,7 +33,7 @@ void ScaffoldCue(const std::string& components_path, const std::string& scaffold
 void StaticCue(const std::string& components_path, const std::string& dir_name, const std::vector<std::string>& arg) {
 
     std::string cue_path = std::getenv("CUE");
-    std::string dir = "\\static\\Index.vue";
+    std::string dir = "\\static\\Static.vue";
 
     fs::create_directories(components_path + dir_name);
 
