@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include <string>
+#include <vector>
 
 namespace fs = std::filesystem;
 
@@ -29,17 +30,21 @@ void ScaffoldCue(const std::string& components_path, const std::string& scaffold
     std::cout << "Scaffold " << scaffold_name << " Template!" << std::endl;
 }
 
-void StaticCue(const std::string& components_path, const std::string& scaffold_name) {
+void StaticCue(const std::string& components_path, const std::string& dir_name, const std::vector<std::string>& arg) {
 
     std::string cue_path = std::getenv("CUE");
-    std::string dir = "\\static";
+    std::string dir = "\\static\\Index.vue";
 
-    fs::path path = components_path + scaffold_name;
-    fs::path scaffold = cue_path + dir;
+    fs::create_directories(components_path + dir_name);
 
-    fs::copy(scaffold, path, fs::copy_options::recursive);
+    for(auto&& a : arg) {
+        fs::path path = components_path + dir_name + "/" + a + ".vue";
+        fs::path scaffold = cue_path + dir;
 
-    std::cout << "Static " << scaffold_name << " Template!" << std::endl;
+        fs::copy(scaffold, path, fs::copy_options::recursive);
+
+        std::cout << "Static " << a << " Template!" << std::endl;
+    }
 }
 
 void ShowCommand() {
@@ -61,7 +66,13 @@ int main(int argc, char* argv[]) {
     } else if (cmd == "scaffold") {
         ScaffoldCue("assets/components/", argv[2]);
     } else if (cmd == "static") {
-        StaticCue("assets/components/", argv[2]);
+
+        std::vector<std::string> arg;
+
+        for(std::size_t i = 3; i < argc; i++)
+            arg.emplace_back(std::move(argv[i]));
+
+        StaticCue("assets/components/", argv[2], arg);
     } else if (cmd == "help") {
         ShowCommand();
     }
