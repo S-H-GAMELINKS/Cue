@@ -32,7 +32,7 @@ int main() {
     std::string indexjs = LoadAssets("./assets/index.js");
 
     for (auto&& route : routes) {
-        svr.Get(route, [&](const httplib::Request& req, httplib::Response& res) {
+        svr.Get(route.c_str(), [&](const httplib::Request& req, httplib::Response& res) {
             res.set_content(body, "text/html");
         });
     }
