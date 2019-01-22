@@ -5,11 +5,9 @@
 
 namespace fs = std::filesystem;
 
-void CreateCue(const std::string& argv) {
+void CreateCue(const std::string& argv, const std::string& cue_path, const std::string& dir) {
     fs::path path = argv;
 
-    std::string cue_path = std::getenv("CUE");
-    std::string dir = "\\cue";
     fs::path cue = cue_path + dir;
 
     fs::copy(cue, path, fs::copy_options::recursive);
@@ -62,7 +60,7 @@ int main(int argc, char* argv[]) {
     std::string cmd = argv[1];
 
     if (cmd == "new") {
-        CreateCue(argv[2]);
+        CreateCue(argv[2], std::getenv("CUE"), "\\cue");
     } else if (cmd == "scaffold") {
         ScaffoldCue("assets/components/", argv[2]);
     } else if (cmd == "static") {
