@@ -59,8 +59,10 @@ int main(int argc, char* argv[]) {
 
     std::string cmd = argv[1];
 
+    const std::string cue_path = std::getenv("CUE");
+
     if (cmd == "new") {
-        CreateCue(argv[2], std::getenv("CUE"), "\\cue");
+        CreateCue(argv[2], cue_path, "\\cue");
     } else if (cmd == "scaffold") {
         ScaffoldCue("assets/components/", argv[2]);
     } else if (cmd == "static") {
