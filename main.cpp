@@ -5,7 +5,7 @@
 
 namespace fs = std::filesystem;
 
-void CreateCue(const char* argv) {
+void CreateCue(const std::string& argv) {
     fs::path path = argv;
 
     std::string cue_path = std::getenv("CUE");
