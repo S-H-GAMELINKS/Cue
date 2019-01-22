@@ -15,10 +15,7 @@ void CreateCue(const std::string& argv, const std::string& cue_path, const std::
     std::cout << "Create Cue Template!" << std::endl;
 }
 
-void ScaffoldCue(const std::string& components_path, const std::string& scaffold_name) {
-
-    std::string cue_path = std::getenv("CUE");
-    std::string dir = "\\scaffold";
+void ScaffoldCue(const std::string& components_path, const std::string& scaffold_name, const std::string& cue_path, const std::string& dir) {
 
     fs::path path = components_path + scaffold_name;
     fs::path scaffold = cue_path + dir;
@@ -64,7 +61,7 @@ int main(int argc, char* argv[]) {
     if (cmd == "new") {
         CreateCue(argv[2], cue_path, "\\cue");
     } else if (cmd == "scaffold") {
-        ScaffoldCue("assets/components/", argv[2]);
+        ScaffoldCue("assets/components/", argv[2], cue_path, "\\scaffold");
     } else if (cmd == "static") {
 
         std::vector<std::string> arg;
